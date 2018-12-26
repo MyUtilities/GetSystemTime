@@ -62,3 +62,13 @@ std::chrono::time_point<std::chrono::system_clock> CTime<std::chrono::time_point
 	std::chrono::time_point<std::chrono::system_clock> out_time_point = std::chrono::system_clock::now();
 	return out_time_point;
 }
+
+template<>
+void CTime<unsigned long long>::Set_System_Time(unsigned long long seconds)
+{
+	struct timeval tv;
+	tv.tv_sec = seconds;
+	tv.tv_usec = 0;
+	settimeofday(&tv,NULL);		
+}
+
